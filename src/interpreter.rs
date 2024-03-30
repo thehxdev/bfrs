@@ -1,4 +1,4 @@
-use std::io::*;
+use std::io::{stdin, Read};
 use crate::scanner::BFCmd;
 
 const DEFAULT_CAP: usize = 1 << 16;
@@ -8,7 +8,6 @@ pub fn execute(tks: Vec<BFCmd>) {
     let mut ptr: usize = 0;
     let mut i: usize = 0;
     let mut j: usize;
-    // let term = Term::stdout();
 
     while i < tks.len() {
         match &tks[i] {

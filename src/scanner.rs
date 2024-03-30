@@ -44,7 +44,7 @@ fn handle_jump(tks: &mut Vec<BFCmd>) -> BFCmdInfo {
     let mut info = BFCmdInfo { rep: 1, m_idx: 0 };
     let mut nest = 0;
 
-    while i >= 0 {
+    while (i as isize) >= 0 {
         match &mut tks[i] {
             BFCmd::JmpB(_) => {
                 nest += 1;
