@@ -7,7 +7,6 @@ pub fn execute(tks: Vec<BFCmd>) {
     let mut arr: [u8; DEFAULT_CAP] = [0; DEFAULT_CAP];
     let mut ptr: usize = 0;
     let mut i: usize = 0;
-    let mut j: usize;
 
     while i < tks.len() {
         match &tks[i] {
@@ -20,23 +19,19 @@ pub fn execute(tks: Vec<BFCmd>) {
             BFCmd::DecVal(info) => arr[ptr] -= (info.rep) as u8,
 
             BFCmd::Write(info) => {
-                j = 0;
-                while j < info.rep {
+                let mut j = info.rep;
+                while j > 0 {
                     print!("{}", arr[ptr] as char);
-                    j += 1;
+                    j -= 1;
                 }
             }
 
-            BFCmd::Read(info) => {
-                j = 0;
-                while j < info.rep {
-                    let mut buff: [u8; 1] = [0; 1];
-                    stdin()
-                        .read(&mut buff)
-                        .expect("Failed to read from stdin");
-                    arr[ptr] = buff[0];
-                    j += 1;
-                }
+            BFCmd::Read(_) => {
+                let mut buff: [u8; 1] = [0; 1];
+                stdin()
+                    .read(&mut buff)
+                    .expect("Failed to read from stdin");
+                arr[ptr] = buff[0];
             }
 
             BFCmd::JmpF(info) => { 
