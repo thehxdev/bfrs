@@ -1,4 +1,4 @@
-use std::io::{stdin, Read};
+use std::io::{stdin, stdout, Read, Write};
 use crate::scanner::BFCmd;
 
 const DEFAULT_CAP: usize = 1 << 16;
@@ -21,7 +21,8 @@ pub fn execute(tks: Vec<BFCmd>) {
             BFCmd::Write(info) => {
                 let mut j = info.rep;
                 while j > 0 {
-                    print!("{}", arr[ptr] as char);
+                    let mut lock = stdout().lock();
+                    write!(lock, "{}", arr[ptr] as char).unwrap();
                     j -= 1;
                 }
             }
