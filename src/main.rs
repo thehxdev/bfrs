@@ -1,7 +1,7 @@
 use std::{fs, io::Read};
 use bfrs::{scanner, interpreter};
 
-const BFRS_VERSION: &str  = "0.0.1";
+const BFRS_VERSION: &str  = "1.0.0";
 
 
 fn is_bf_cmd(char: &u8) -> bool {
