@@ -7,6 +7,7 @@ pub fn execute(tks: Vec<BFCmd>) {
     let mut arr: [u8; DEFAULT_CAP] = [0; DEFAULT_CAP];
     let mut ptr: usize = 0;
     let mut i: usize = 0;
+    let mut lock = stdout().lock();
 
     while i < tks.len() {
         match &tks[i] {
@@ -21,7 +22,6 @@ pub fn execute(tks: Vec<BFCmd>) {
             BFCmd::Write(info) => {
                 let mut j = info.rep;
                 while j > 0 {
-                    let mut lock = stdout().lock();
                     write!(lock, "{}", arr[ptr] as char).unwrap();
                     j -= 1;
                 }
