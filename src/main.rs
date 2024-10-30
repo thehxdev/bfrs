@@ -6,14 +6,7 @@ const BFRS_VERSION: &str  = "1.0.0";
 
 fn is_bf_cmd(char: &u8) -> bool {
     match *char {
-        b'>' => true,
-        b'<' => true,
-        b'+' => true,
-        b'-' => true,
-        b'.' => true,
-        b',' => true,
-        b'[' => true,
-        b']' => true,
+        b'>' | b'<' | b'+' | b'-' | b'.' | b',' | b'[' | b']'  => true,
         _ => false,
     }
 }
