@@ -22,7 +22,7 @@ pub fn execute(tks: Vec<BFCmd>) {
             BFCmd::Write(info) => {
                 let mut j = info.rep;
                 while j > 0 {
-                    write!(lock, "{}", arr[ptr] as char).unwrap();
+                    write!(&mut lock, "{}", arr[ptr] as char).unwrap();
                     j -= 1;
                 }
             }
