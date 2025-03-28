@@ -3,15 +3,6 @@ use bfrs::{scanner, interpreter};
 
 const BFRS_VERSION: &str  = "1.0.0";
 
-
-fn is_bf_cmd(char: &u8) -> bool {
-    match *char {
-        b'>' | b'<' | b'+' | b'-' | b'.' | b',' | b'[' | b']'  => true,
-        _ => false,
-    }
-}
-
-
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() != 2 {
@@ -32,7 +23,10 @@ fn main() {
 
     let cmds = source_content
         .into_iter()
-        .filter(|char| is_bf_cmd(char))
+        .filter(|ch| match *ch {
+            b'>' | b'<' | b'+' | b'-' | b'.' | b',' | b'[' | b']'  => true,
+            _ => false,
+        })
         .collect();
 
     let cmds = scanner::tokenize_cmds(cmds);
