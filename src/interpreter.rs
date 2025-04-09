@@ -19,6 +19,18 @@ pub fn execute(tks: Vec<BFCmd>) {
 
             BFCmd::DecVal(info) => arr[ptr] -= (info.rep) as u8,
 
+            BFCmd::JmpF(info) => {
+                if arr[ptr] == 0 {
+                    i = info.m_idx
+                }
+            }
+
+            BFCmd::JmpB(info) => {
+                if arr[ptr] != 0 {
+                    i = info.m_idx
+                }
+            }
+
             BFCmd::Write(info) => {
                 let mut j = info.rep;
                 while j > 0 {
@@ -33,18 +45,6 @@ pub fn execute(tks: Vec<BFCmd>) {
                     .read(&mut buff)
                     .expect("Failed to read from stdin");
                 arr[ptr] = buff[0];
-            }
-
-            BFCmd::JmpF(info) => { 
-                if arr[ptr] == 0 {
-                    i = info.m_idx
-                }
-            }
-
-            BFCmd::JmpB(info) => {
-                if arr[ptr] != 0 {
-                    i = info.m_idx
-                }
             }
         } // end match
 
